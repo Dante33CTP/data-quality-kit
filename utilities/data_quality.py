@@ -1,6 +1,7 @@
 import pandas as pd
 from pandas import DataFrame
 
+
 def df_is_empty(df: DataFrame) -> bool:
     """
     Check if a DataFrame is empty.
