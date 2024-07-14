@@ -2,12 +2,11 @@ import unittest
 
 import pandas as pd
 
-from utilities.check_pk_duplicates import check_no_duplicates 
-
+from utilities.check_pk_duplicates import check_no_duplicates  # Asegúrate de reemplazar 'utilities.data_quality' con la ruta correcta a tu módulo
 
 class TestCheckNoDuplicates(unittest.TestCase):
     def setUp(self):
-        # Create a sample DataFrame to use in the tests
+        # Crear un DataFrame de ejemplo para usar en las pruebas
         self.df_ok = pd.DataFrame({
             'id': [1, 2, 3, 4, 5],
             'name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve']
@@ -18,21 +17,20 @@ class TestCheckNoDuplicates(unittest.TestCase):
         })
 
     def test_no_duplicates_ok(self):
-        # Test if there are no duplicate values in the 'id' column
+        # Prueba si no hay valores duplicados en la columna 'id'
         result = check_no_duplicates(self.df_ok, 'id')
-        self.assertEqual(result, 'OK: No duplicate values in the primary key column')
+        self.assertTrue(result)
 
     def test_duplicates_ko(self):
-        # Test if the function raises a ValueError when there are duplicate values in the 'id' column
-        with self.assertRaises(ValueError) as context:
-            check_no_duplicates(self.df_duplicated, 'id')
-        self.assertEqual(str(context.exception), 'KO: Duplicate values found in the primary key column "id"')
+        # Prueba si la función devuelve False cuando hay valores duplicados en la columna 'id'
+        result = check_no_duplicates(self.df_duplicated, 'id')
+        self.assertFalse(result)
 
     def test_nonexistent_column(self):
-        # Test if the function raises a ValueError when the column does not exist
-        with self.assertRaises(ValueError) as context:
-            check_no_duplicates(self.df_ok, 'nonexistent_column')
-        self.assertEqual(str(context.exception), 'Error: The primary key column "nonexistent_column" is not in the DataFrame')
+        # Prueba si la función devuelve False cuando la columna no existe
+        result = check_no_duplicates(self.df_ok, 'nonexistent_column')
+        self.assertFalse(result)
 
 if __name__ == '__main__':
     unittest.main()
+    
