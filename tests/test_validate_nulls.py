@@ -5,31 +5,29 @@ import pandas as pd
 from utilities.validate_nulls import check_nulls
 
 class TestCheckNulls(unittest.TestCase):
+    
     def setUp(self):
-        self.df_ok = pd.DataFrame({
-            'id': [1, 2, 3, 4, 5],
-            'name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve']
-        })
-        self.df_with_nulls = pd.DataFrame({
-            'id': [1, 2, 3, None, 5],
-            'name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve']
-        })
+        data = {
+            'column1': [1, 2, 3],
+            'column2': [None, 2, 3],
+            'column3': ['a', 'b', 'c']
+        }
+        self.df = pd.DataFrame(data)
 
-    def test_no_nulls_ok(self):
-        result = check_nulls(self.df_ok, 'id')
-        self.assertTrue(result)
+    def test_nulls_present(self):
+        self.assertTrue(check_nulls(self.df, 'column2'))
 
-    def test_with_nulls_ko(self):
-        result = check_nulls(self.df_with_nulls, 'id')
-        self.assertFalse(result)
+    def test_no_nulls(self):
+        self.assertFalse(check_nulls(self.df, 'column1'))
+        self.assertFalse(check_nulls(self.df, 'column3'))
 
-    def test_nonexistent_column(self):
-        result = check_nulls(self.df_ok, 'nonexistent_column')
-        self.assertFalse(result)
+    def test_invalid_column_name(self):
+        with self.assertRaises(ValueError):
+            check_nulls(self.df, 'non_existent_column')
 
-    def test_invalid_field_name_type(self):
-        result = check_nulls(self.df_ok, 123)  # Passing an integer instead of string
-        self.assertFalse(result)
+    def test_invalid_column_type(self):
+        with self.assertRaises(TypeError):
+            check_nulls(self.df, 123)
 
 if __name__ == '__main__':
     unittest.main()
