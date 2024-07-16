@@ -1,6 +1,6 @@
 import pandas as pd
 
-def check_type(df: pd.DataFrame, column_name: str, data_type: type) -> bool:
+def check_type_format(df: pd.DataFrame, column_name: str, data_type: type) -> bool:
     """
     Check if all non-null entries in a specified column of a DataFrame are of the specified data type.
 
