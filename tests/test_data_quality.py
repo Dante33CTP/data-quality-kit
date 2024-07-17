@@ -1,20 +1,22 @@
 import unittest
+
 import pandas as pd
+
+from tests.global_test_data import df_global
+
 from utilities.data_quality import df_is_empty
 
-class TestDfIsEmpty(unittest.TestCase):
+class TestValidateFormats(unittest.TestCase):
     
-    def test_empty_dataframe(self):
-        df = pd.DataFrame()
-        self.assertTrue(df_is_empty(df))
-    
-    def test_non_empty_dataframe(self):
-        df = pd.DataFrame({'col1': [1, 2, 3]})
-        self.assertFalse(df_is_empty(df))
-    
-    def test_non_empty_dataframe_with_index(self):
-        df = pd.DataFrame({'col1': [1, 2, 3]}, index=[0, 1, 2])
-        self.assertFalse(df_is_empty(df))
+    def setUp(self):
+        # Extender el DataFrame global según las necesidades del test
+        self.df_empty = df_global.copy().iloc[0:0]  # DataFrame vacío
+        self.df_full = df_global.copy()  # DataFrame lleno
+
+    def test_df_is_empty(self):
+        self.assertTrue(df_is_empty(self.df_empty))
+        self.assertFalse(df_is_empty(self.df_full))
 
 if __name__ == '__main__':
     unittest.main()
+
