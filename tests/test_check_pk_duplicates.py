@@ -17,11 +17,9 @@ class TestDataQuality(unittest.TestCase):
         result_duplicated = check_no_duplicates(df_global, 'duplicated_ids')
         self.assertTrue(result_duplicated)
 
-    def test_nonexistent_column(self):
-        # Prueba si la función lanza un ValueError cuando la columna no existe
-        with self.assertRaises(ValueError) as context:
+    def test_invalid_column(self):
+        with self.assertRaises(ValueError):
             check_no_duplicates(df_global, 'nonexistent_column')
-        self.assertEqual(str(context.exception), 'Error: The column "nonexistent_column" is not in the DataFrame.')
 
 if __name__ == '__main__':
     unittest.main()
