@@ -1,35 +1,19 @@
-import unittest
+import pytest
 
-import pandas as pd
+from assertpy import assert_that
+
+from tests.global_test_data import df_global
 
 from utilities.validate_formats import check_type_format
 
-class TestCheckType(unittest.TestCase):
-    
-    def setUp(self):
-        # Crear un DataFrame de ejemplo directamente
-        self.df = pd.DataFrame({
-            'id': [1, 2, None, 4],
-            'name': ['Alice', 'Bob', 'Charlie', None],
-            'age': [25, 30, 35, 40]
-        })
+def test_correct_type():
+    assert_that(check_type_format(df_global, 'column1', int)).is_true()
+    assert_that(check_type_format(df_global, 'column3', str)).is_true()
 
-    def test_correct_type_int(self):
-        # Verifica que todos los valores no nulos en 'age' sean del tipo int
-        self.assertTrue(check_type_format(self.df, 'age', int))
+def test_incorrect_type():
+    assert_that(check_type_format(df_global, 'column3', int)).is_false()
+    assert_that(check_type_format(df_global, 'column2', str)).is_false()
 
-    def test_correct_type_str(self):
-        # Verifica que todos los valores no nulos en 'name' sean del tipo str
-        self.assertTrue(check_type_format(self.df, 'name', str))
-
-    def test_invalid_type(self):
-        # Verifica que no todos los valores no nulos en 'id' sean del tipo bool
-        self.assertFalse(check_type_format(self.df, 'id', bool))
-
-    def test_invalid_column_name(self):
-        # Verifica que se lance ValueError si el nombre de la columna no existe
-        with self.assertRaises(ValueError):
-            check_type_format(self.df, 'non_existent_column', int)
-
-if __name__ == '__main__':
-    unittest.main()
+def test_nonexistent_column():
+    with pytest.raises(ValueError, match='Error: The column "nonexistent_column" does not exist in the DataFrame.'):
+        check_type_format(df_global, 'nonexistent_column', int)
