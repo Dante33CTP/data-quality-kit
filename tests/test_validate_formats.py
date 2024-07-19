@@ -2,34 +2,31 @@ import unittest
 
 import pandas as pd
 
+from tests.global_test_data import df_global
+
 from utilities.validate_formats import check_type_format
 
-class TestCheckType(unittest.TestCase):
-    
-    def setUp(self):
-        # Crear un DataFrame de ejemplo directamente
-        self.df = pd.DataFrame({
-            'id': [1, 2, None, 4],
-            'name': ['Alice', 'Bob', 'Charlie', None],
-            'age': [25, 30, 35, 40]
-        })
+class TestCheckTypeFormat(unittest.TestCase):
 
-    def test_correct_type_int(self):
-        # Verifica que todos los valores no nulos en 'age' sean del tipo int
-        self.assertTrue(check_type_format(self.df, 'age', int))
+    def test_valid_type(self):
+        # Prueba si la función retorna True cuando todos los valores de 'column1' son de tipo int
+        result_int = check_type_format(df_global, 'column1', int)
+        self.assertTrue(result_int)
 
-    def test_correct_type_str(self):
-        # Verifica que todos los valores no nulos en 'name' sean del tipo str
-        self.assertTrue(check_type_format(self.df, 'name', str))
+        # Prueba si la función retorna True cuando todos los valores de 'column3' son de tipo str
+        result_str = check_type_format(df_global, 'column3', str)
+        self.assertTrue(result_str)
 
     def test_invalid_type(self):
-        # Verifica que no todos los valores no nulos en 'id' sean del tipo bool
-        self.assertFalse(check_type_format(self.df, 'id', bool))
+        # Prueba si la función retorna False cuando no todos los valores de 'column2' son de tipo int
+        result_invalid = check_type_format(df_global, 'column2', int)
+        self.assertFalse(result_invalid)
 
-    def test_invalid_column_name(self):
-        # Verifica que se lance ValueError si el nombre de la columna no existe
+    def test_nonexistent_column(self):
+        # Prueba si la función lanza un ValueError cuando la columna no existe
         with self.assertRaises(ValueError):
-            check_type_format(self.df, 'non_existent_column', int)
+            check_type_format(df_global, 'nonexistent_column', int)
+
 
 if __name__ == '__main__':
     unittest.main()
