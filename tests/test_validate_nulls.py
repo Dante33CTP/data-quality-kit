@@ -1,10 +1,8 @@
-import pytest
-
 from assertpy import assert_that
 
 from tests.global_test_data import df_global
 
-from utilities.validate_nulls import check_nulls
+from data_quality_kit.validate_nulls import check_nulls
 
 def test_nulls_present():
     assert_that(check_nulls(df_global, 'column2')).is_true()

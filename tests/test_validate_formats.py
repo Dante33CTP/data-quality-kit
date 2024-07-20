@@ -1,10 +1,8 @@
-import pytest
-
 from assertpy import assert_that
 
 from tests.global_test_data import df_global
 
-from utilities.validate_formats import check_type_format
+from data_quality_kit.validate_formats import check_type_format
 
 def test_correct_type():
     assert_that(check_type_format(df_global, 'column1', int)).is_true()

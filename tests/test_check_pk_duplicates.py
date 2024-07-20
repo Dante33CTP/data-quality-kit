@@ -1,10 +1,8 @@
-import pytest
-
 from assertpy import assert_that
 
 from tests.global_test_data import df_global
 
-from utilities. check_pk_duplicates import check_no_duplicates
+from data_quality_kit.check_pk_duplicates import check_no_duplicates
 
 def test_no_duplicates():
     assert_that(check_no_duplicates(df_global, 'unique_ids')).is_false()
