@@ -16,9 +16,9 @@ def check_nulls(df: pd.DataFrame, field_name: str) -> bool:
     ValueError: If the field_name is not a column in the DataFrame.
     """
     if not isinstance(field_name, str):
-        raise TypeError('Error: The field name must be a string.')
+        raise TypeError('Error: Field name must be a string.')
     
     if field_name not in df.columns:
-        raise ValueError(f'Error: The field "{field_name}" is not in the DataFrame.')
+        raise ValueError(f'Error: Field "{field_name}" not in DataFrame.')
 
     return df[field_name].isnull().any()

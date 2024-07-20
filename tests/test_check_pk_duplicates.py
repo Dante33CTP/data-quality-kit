@@ -13,8 +13,7 @@ def test_duplicates():
     assert_that(check_no_duplicates(df_global, 'duplicated_ids')).is_true()
 
 def test_invalid_column_name():
-    error_msg = 'Error: The column "nonexistent_column" is not in the DataFrame.'
-#    assert_that(check_no_duplicates).raises(ValueError).when_called_with(df_global, "nonexistent_column").is_equal_to(error_msg)
-#    with pytest.raises(ValueError, match='Error: The column "nonexistent_column" is not in the DataFrame.'):
-#        check_no_duplicates(df_global, 'nonexistent_column')
-
+    error_msg = 'Column "nonexistent" not in DataFrame.'
+    assert_that(check_no_duplicates).raises(ValueError).when_called_with(
+        df_global, "nonexistent"
+    ).is_equal_to(error_msg)

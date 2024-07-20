@@ -16,7 +16,7 @@ def check_type_format(df: pd.DataFrame, column_name: str, data_type: type) -> bo
         ValueError: If the column does not exist in the DataFrame or if at least one entry is not of the specified data type.
     """
     if column_name not in df.columns:
-        raise ValueError(f'Error: The column "{column_name}" does not exist in the DataFrame.')
+        raise ValueError(f'Column "{column_name}" not in DataFrame.')
     
     filtered_values = df[df[column_name].notnull()]
     return filtered_values[column_name].apply(lambda x: isinstance(x, data_type)).all()
