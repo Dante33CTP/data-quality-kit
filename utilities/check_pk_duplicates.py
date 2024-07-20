@@ -15,7 +15,7 @@ def check_no_duplicates(df: pd.DataFrame, pk_column: str) -> bool:
     ValueError: If the pk_column is not a column in the DataFrame.
     """
     if pk_column not in df.columns:
-        raise ValueError(f'Error: The column "{pk_column}" is not in the DataFrame.')
+        raise ValueError(f'Column "{pk_column}" not in DataFrame.')
     
     return df[pk_column].duplicated().any()
 
