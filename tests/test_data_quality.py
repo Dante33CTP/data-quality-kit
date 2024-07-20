@@ -1,20 +1,16 @@
-import unittest
+import pytest
+
 import pandas as pd
-from utilities.data_quality import df_is_empty
 
-class TestDfIsEmpty(unittest.TestCase):
-    
-    def test_empty_dataframe(self):
-        df = pd.DataFrame()
-        self.assertTrue(df_is_empty(df))
-    
-    def test_non_empty_dataframe(self):
-        df = pd.DataFrame({'col1': [1, 2, 3]})
-        self.assertFalse(df_is_empty(df))
-    
-    def test_non_empty_dataframe_with_index(self):
-        df = pd.DataFrame({'col1': [1, 2, 3]}, index=[0, 1, 2])
-        self.assertFalse(df_is_empty(df))
+from assertpy import assert_that
 
-if __name__ == '__main__':
-    unittest.main()
+from tests.global_test_data import df_global  
+
+from utilities.data_quality import df_is_empty  
+
+def test_df_is_empty():
+    df_empty = df_global.iloc[0:0]
+    assert_that(df_is_empty(df_empty)).is_true()
+
+def test_df_is_not_empty():
+    assert_that(df_is_empty(df_global)).is_false()
