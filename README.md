@@ -1,4 +1,4 @@
-# EssentialKit
+# Data-Quality-Kit
 
 ## Functional Description
 A library of functions for managing and improving data quality in Datasets
