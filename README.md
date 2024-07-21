@@ -26,7 +26,9 @@ Install the library
 ```bash
 pip install data-quality-kit
 ```
-
+```
+from data_quality_quick.validate_formats import check_type_format
+```
 
 ## Functionalities
 - **df_is_empty**: Check if a DataFrame is empty.
