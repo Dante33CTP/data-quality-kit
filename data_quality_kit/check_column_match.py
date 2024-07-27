@@ -1,6 +1,5 @@
-import pandas as pd
-
 from pandas import DataFrame
+
 
 def check_column_match(df1: DataFrame, column1: str, df2: DataFrame, column2: str) -> bool:
     """
@@ -26,4 +25,5 @@ def check_column_match(df1: DataFrame, column1: str, df2: DataFrame, column2: st
         #raise ValueError(f'Error: The column "{column2}" does not exist in the second DataFrame.')
         raise ValueError(f'Error: The column "{column2}" not in DataFrame.')
 
+    # Todos los registros de column2 deben estar en column1, aunque la cantidad de registros sea distinta
     return df1[column1].isin(df2[column2]).all()
