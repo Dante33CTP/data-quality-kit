@@ -1,7 +1,7 @@
 from pandas import DataFrame
 
 
-def check_column_match(df1: DataFrame, column1: str, df2: DataFrame, column2: str) -> bool:
+def check_column_match(df1: DataFrame, primary_key_column: str, df2: DataFrame, foreign_key_column: str) -> bool:
     """
     Check if all values in column1 of df1 are present in column2 of df2.
 
@@ -17,13 +17,8 @@ def check_column_match(df1: DataFrame, column1: str, df2: DataFrame, column2: st
     Raises:
     ValueError: If either column does not exist in its respective DataFrame.
     """
-
-    if column1 not in df1.columns:
-        #raise ValueError(f'Error: The column "{column1}" does not exist in the first DataFrame.')
-        raise ValueError(f'Error: The column "{column1}" not in DataFrame.')
-    if column2 not in df2.columns:
-        #raise ValueError(f'Error: The column "{column2}" does not exist in the second DataFrame.')
-        raise ValueError(f'Error: The column "{column2}" not in DataFrame.')
-
-    # Todos los registros de column2 deben estar en column1, aunque la cantidad de registros sea distinta
-    return df1[column1].isin(df2[column2]).all()
+    if primary_key_column not in df1.columns:
+        raise ValueError(f'Error: The column "{primary_key_column}" does not exist in the first DataFrame.')
+    if foreign_key_column not in df2.columns:
+        raise ValueError(f'Error: The column "{foreign_key_column}" does not exist in the second DataFrame.')
+    return df2[foreign_key_column].isin(df1[primary_key_column]).all()

@@ -11,6 +11,6 @@ df_global = pd.DataFrame({
     'duplicated_ids': [1, 2, 2, 4, 5],
     'match_column1': [11, 12, 13, 14, 15],
     'match_column2': [15, 14, 13, 12, 11],
-    # 'match_column_with_duplicates': [11, 12, 13, 14, 15, 11, 14, 12]
+    'match_column_with_duplicates': [11, 11, 13, 13, 15]
 })
 
