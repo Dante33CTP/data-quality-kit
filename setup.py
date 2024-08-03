@@ -6,7 +6,7 @@ with open("README.md", "r") as file:
 
 setup(
     name="data-quality-kit",
-    version="0.1.0",
+    version="0.2.0",
     description=" library of functions for managing and improving data quality in Datasets",
     packages=find_packages(),
     long_description=long_description,
@@ -16,7 +16,8 @@ setup(
     author_email="dante.victor.33@gmail.com",
     license="Apache License 2.0",
     keywords="Data Quality",
-    install_requires=["pandas >= 2.2.2", "assertpy >= 1.1.0 ", "pytest >= 8.2.2"],
+    install_requires=["pandas >= 2.2.2",
+                      "assertpy >= 1.1.0 ", "pytest >= 8.2.2"],
     test_suite='tests',
     tests_require=['pytest'],
     classifiers=[
