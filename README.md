@@ -34,7 +34,8 @@ from data_quality_quick.validate_formats import check_type_format
 
 - **Completeness**
   - **assert_that_dataframe_is_empty**: Check if a DataFrame is empty.
-- **check_nulls**: Checks for null values in a specified column of a DataFrame.
+- **Validity**
+  - **assert_there_are_not_nulls**: Checks for null values in a specified column of a DataFrame.
 - **check_type_format**: Check if all non-null entries in a specified column of a DataFrame are of the specified data type.
 - **check_no_duplicates**: Checks for duplicate values in the specified primary key column of a DataFrame.
 - **check_column_match** :  Check if all values in column2 of df2 are present in column1 of df1.
