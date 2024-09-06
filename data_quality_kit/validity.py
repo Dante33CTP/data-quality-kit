@@ -6,8 +6,8 @@ def assert_that_there_are_not_nulls(df: DataFrame, field_name: str) -> bool:
     Checks for null values in a specified column of a DataFrame.
 
     Parameters:
-    df (pd.DataFrame): The DataFrame to check.
-    field_name (str): The name of the column to check for null values.
+    df : The DataFrame to check.
+    field_name : The name of the column to check for null values.
 
     Returns:
     bool: True if there are null values in the column, False if there are no null values.
