@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def assert_there_are_not_nulls(df: pd.DataFrame, field_name: str) -> bool:
+def assert_that_there_are_not_nulls(df: pd.DataFrame, field_name: str) -> bool:
     """
     Checks for null values in a specified column of a DataFrame.
 

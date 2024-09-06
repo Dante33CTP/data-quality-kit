@@ -8,7 +8,7 @@ New functionalities.
 ### Added
 
 ### Changed
-- Renamed the function chech_nulls to assert_there_are_not_nulls
+- Renamed the function chech_nulls to assert_that_there_are_not_nulls
 - Added a new validity module to the data_quality_kit for enhanced data validity checks.
 - Rename corresponding test cases for the validity module in the test suite.
 
