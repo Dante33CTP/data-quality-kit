@@ -3,10 +3,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.0] - 2024-09-06
+New functionalities.
+### Added
+
+### Changed
+- Renamed the function chech_nulls to assert_that_there_are_not_nulls
+- Added a new validity module to the data_quality_kit for enhanced data validity checks.
+- Rename corresponding test cases for the validity module in the test suite.
+
+### Fixed
+
 ## [0.3.0] - 2024-09-04
 New functionalities.
 ### Added
-- 
+
 ### Changed
 - Renamed the function df_is_empty to assert_that_dataframe_is_empty
 - Added a new completeness module to the data_quality_kit for enhanced data completeness checks.
