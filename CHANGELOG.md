@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.0] - 2024-09-21
+New functionalities.
+### Added
+
+### Changed
+- Renamed the function check_column_match to assert_that_columns_values_match
+- Renamed the function check_no_duplicates to assert_that_there_are_not_duplicates
+- Added a new consistency module to the data_quality_kit for enhanced data consistency checks.
+- Rename corresponding test cases for the consistency module in the test suite.
+
+### Fixed
+
 ## [0.4.0] - 2024-09-06
 New functionalities.
 ### Added
