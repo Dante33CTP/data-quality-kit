@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.0] - 2024-09-25
+New functionalities.
+### Added
+
+### Changed
+- Renamed the function check_type_format to  assert_that_type_value
+- Added a new acurracy module to the data_quality_kit for enhanced data acurracy checks.
+- Rename corresponding test cases for the acurracy module in the test suite.
+
+### Fixed
+
 ## [0.5.0] - 2024-09-21
 New functionalities.
 ### Added
