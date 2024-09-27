@@ -6,7 +6,7 @@ with open("README.md", "r") as file:
 
 setup(
     name="data-quality-kit",
-    version="0.5.0",
+    version="0.6.0",
     description=" library of functions for managing and improving data quality in Datasets",
     packages=find_packages(),
     long_description=long_description,
