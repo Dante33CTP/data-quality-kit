@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.7.0] - 2024-10-07
+New functionalities.
+### Added
+- Added `assert_that_values_in_catalog` function to check if all values in a specified DataFrame column are present in a catalog (list).
+- Added test cases to validate the behavior of `assert_that_values_in_catalog` in various scenarios:
+  - All values are in the catalog.
+  - Not all values are in the catalog.
+  - Column not present in the DataFrame.
+  - Empty catalog handling.
+
+### Changed
+- No changes in this release.
+
 ## [0.6.0] - 2024-09-27
 New functionalities.
 ### Added

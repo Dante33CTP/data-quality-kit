@@ -39,5 +39,8 @@ from data_quality_quick.validate_formats import check_type_format
 - **Consistency**
   - **assert_that_there_are_not_duplicates**: Checks for duplicate values in the specified primary key column of a DataFrame.
   - **assert_that_columns_values_match** :  Check if all values in column2 of df2 are present in column1 of df1.
-  **Accuracy**
+- **Accuracy**
   - **assert_that_type_value**: Check if all non-null entries in a specified column of a DataFrame are of the specified data type.
+  - **assert_that_values_in_catalog**:  Checks whether all values in the specified column of a DataFrame are present
+    in a catalog (list of values).
+
