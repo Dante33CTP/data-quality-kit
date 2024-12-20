@@ -1,3 +1,4 @@
+import re
 import pandas as pd
 
 
@@ -57,3 +58,48 @@ def assert_that_values_in_catalog(dataframe: pd.DataFrame, column: str, catalog:
         return True
     else:
         return False
+
+def assert_regex_format(column: pd.Series, regex: str) -> bool:
+    """
+    Validates whether all non-null values in the given column match the specified regex pattern.
+
+    Args:
+        column: The column from a pandas DataFrame to validate.
+            Must be a pandas Series containing the data to check.
+        regex: The regular expression pattern to validate against. 
+            Must be a valid string representation of a regex.
+
+    Returns:
+        bool: True if all non-null values in the column match the specified regex pattern,
+              False otherwise.
+
+    Raises:
+        ValueError: If the column is not a pandas Series.
+        ValueError: If the regex is not a valid string.
+        ValueError: If the regex pattern is invalid (e.g., cannot be compiled).
+        ValueError: If the column contains no valid (non-null) entries to validate.
+
+    """
+    # Validar que la columna sea un pandas Series
+    if not isinstance(column, pd.Series):
+        raise ValueError("The 'column' argument must be a pandas Series.")
+    
+    # Validar que el regex sea una cadena válida
+    if not isinstance(regex, str):
+        raise ValueError("The 'regex' argument must be a valid string.")
+    
+    # Intentar compilar el regex
+    try:
+        pattern = re.compile(regex)
+    except re.error:
+        raise ValueError("Invalid regular expression.")
+    
+    # Filtrar valores no nulos
+    non_null_values = column.dropna()
+
+    # Verificar si la columna tiene valores no nulos
+    if non_null_values.empty:
+        raise ValueError("The column contains no valid (non-null) entries to validate.")
+    
+    # Verificar si todos los valores no nulos cumplen el patrón regex
+    return non_null_values.apply(lambda x: isinstance(x, str) and bool(pattern.fullmatch(x))).all()

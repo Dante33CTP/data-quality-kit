@@ -12,5 +12,7 @@ df_global = pd.DataFrame({
     'match_column1': [11, 12, 13, 14, 15],
     'match_column2': [15, 14, 13, 12, 11],
     'match_column_with_duplicates': [11, 11, 13, 13, 15],
-    'test_column': ['Value1', 'Value2', 'Value3', 'Value1', 'Value4']
+    'test_column': ['Value1', 'Value2', 'Value3', 'Value1', 'Value4'],
+    'valid_values': ['abc123', 'def456', 'ghi789','xyz123','fec444'], 
+    'invalid_values': ['invalid!', 'helloworld!', None, 124, None]
 })
