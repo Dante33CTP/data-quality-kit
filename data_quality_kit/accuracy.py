@@ -80,26 +80,26 @@ def assert_regex_format(column: pd.Series, regex: str) -> bool:
         ValueError: If the column contains no valid (non-null) entries to validate.
 
     """
-    # Validar que la columna sea un pandas Series
+    
     if not isinstance(column, pd.Series):
         raise ValueError("The 'column' argument must be a pandas Series.")
     
-    # Validar que el regex sea una cadena válida
+
     if not isinstance(regex, str):
         raise ValueError("The 'regex' argument must be a valid string.")
     
-    # Intentar compilar el regex
+
     try:
         pattern = re.compile(regex)
     except re.error:
         raise ValueError("Invalid regular expression.")
     
-    # Filtrar valores no nulos
+
     non_null_values = column.dropna()
 
-    # Verificar si la columna tiene valores no nulos
+
     if non_null_values.empty:
         raise ValueError("The column contains no valid (non-null) entries to validate.")
     
-    # Verificar si todos los valores no nulos cumplen el patrón regex
+
     return non_null_values.apply(lambda x: isinstance(x, str) and bool(pattern.fullmatch(x))).all()
