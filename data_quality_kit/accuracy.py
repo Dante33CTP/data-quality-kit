@@ -1,7 +1,6 @@
 import re
 import pandas as pd
 
-
 def assert_that_type_value(df: pd.DataFrame, column_name: str, data_type: type) -> bool:
     """
     Check if all non-null entries in a specified column of a DataFrame are of the specified data type.
@@ -59,47 +58,44 @@ def assert_that_values_in_catalog(dataframe: pd.DataFrame, column: str, catalog:
     else:
         return False
 
-def assert_regex_format(column: pd.Series, regex: str) -> bool:
+def assert_regex_format(df: pd.DataFrame, column_name: str, regex: str) -> bool:
     """
-    Validates whether all non-null values in the given column match the specified regex pattern.
+    Validates whether all values in the specified column of a DataFrame match the format
+    defined by the provided regular expression, including null and empty values.
 
-    Args:
-        column: The column from a pandas DataFrame to validate.
-            Must be a pandas Series containing the data to check.
-        regex: The regular expression pattern to validate against. 
-            Must be a valid string representation of a regex.
+    Parameters:
+    ----------
+    df : pd.DataFrame
+        The DataFrame containing the column to validate.
+    column_name : str
+        The name of the column to validate.
+    regex : str
+        The regular expression used to validate each value in the column.
 
     Returns:
-        bool: True if all non-null values in the column match the specified regex pattern,
-              False otherwise.
+    -------
+    bool
+        Returns `True` if all values in the column match the regular expression.
+        Returns `False` if any value does not match.
 
-    Raises:
-        ValueError: If the column is not a pandas Series.
-        ValueError: If the regex is not a valid string.
-        ValueError: If the regex pattern is invalid (e.g., cannot be compiled).
-        ValueError: If the column contains no valid (non-null) entries to validate.
-
+    Exceptions:
+    -----------
+    ValueError:
+        Raised if the DataFrame is empty, the column does not exist, or the regex is invalid.
     """
-    
-    if not isinstance(column, pd.Series):
-        raise ValueError("The 'column' argument must be a pandas Series.")
-    
 
-    if not isinstance(regex, str):
-        raise ValueError("The 'regex' argument must be a valid string.")
+    if df.empty:
+        raise ValueError("The DataFrame is empty and cannot be validated.")
     
-
+    if column_name not in df.columns:
+        raise ValueError(f"The column '{column_name}' does not exist in the DataFrame.")
+    
     try:
         pattern = re.compile(regex)
-    except re.error:
-        raise ValueError("Invalid regular expression.")
-    
+    except re.error as e:
+        raise ValueError(f"Invalid regular expression: {e}")
 
-    non_null_values = column.dropna()
-
-
-    if non_null_values.empty:
-        raise ValueError("The column contains no valid (non-null) entries to validate.")
-    
-
-    return non_null_values.apply(lambda x: isinstance(x, str) and bool(pattern.fullmatch(x))).all()
+    for value in df[column_name]:
+        if pd.isnull(value) or value == '' or not pattern.fullmatch(value):
+            return False
+    return True

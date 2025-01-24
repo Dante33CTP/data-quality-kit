@@ -13,6 +13,6 @@ df_global = pd.DataFrame({
     'match_column2': [15, 14, 13, 12, 11],
     'match_column_with_duplicates': [11, 11, 13, 13, 15],
     'test_column': ['Value1', 'Value2', 'Value3', 'Value1', 'Value4'],
-    'valid_values': ['abc123', 'def456', 'ghi789','xyz123','fec444'], 
-    'invalid_values': ['invalid!', 'helloworld!', None, 124, None]
+    'valid_column': ['ES0011', 'ES0012', 'ES0013', 'ES0014', 'ES0015'],
+    'invalid_column': ['ES0011', 'ES0012', 'ES0013', None, '']
 })

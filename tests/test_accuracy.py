@@ -49,37 +49,31 @@ def test_assert_that_values_in_catalog_with_empty_catalog():
         df_global, 'test_column', []
     ).is_equal_to(error_msg)
 
-
 def test_assert_regex_format_with_all_values_matching_pattern():
-    regex = r"^[A-Za-z0-9]+$" 
-    result = assert_regex_format(df_global['valid_values'], regex)
-    assert_that(result).is_equal_to(True)  # Todos los valores deberían coincidir con el patrón
+    regex = r"ES[0-9]{4}"  
+    result = assert_regex_format(df_global, 'valid_column', regex)
+    assert_that(result).is_equal_to(True)
 
+def test_assert_regex_format_with_some_values_not_matching_pattern():
+    regex = r"ES[0-9]{4}"  
+    result = assert_regex_format(df_global, 'invalid_column', regex)
+    assert_that(result).is_equal_to(False)
 
-def test_assert_regex_format_with_some_values_not_matching_pattern_and_nulls():
-    regex = r"^[A-Za-z0-9]+$"  
-    result = assert_regex_format(df_global['invalid_values'], regex)
-    assert_that(result).is_equal_to(False)  
-
-
-def test_assert_regex_format_with_empty_column():
-    empty_df = df_global.copy()
-    empty_df['regex_test_column'] = [None] * len(empty_df)  
-    regex = r"^[A-Za-z0-9]+$"  
+def test_assert_regex_format_with_nonexistent_column():
+    regex = r"ES[0-9]{4}"  
     assert_that(assert_regex_format).raises(ValueError).when_called_with(
-        empty_df['regex_test_column'], regex
-    ).is_equal_to("The column contains no valid (non-null) entries to validate.")
+        df_global, 'nonexistent_column', regex
+    ).is_equal_to("The column 'nonexistent_column' does not exist in the DataFrame.")
 
-
-def test_assert_regex_format_with_invalid_input_type():
-    regex = r"^[A-Za-z0-9]+$"  
+def test_assert_regex_format_with_empty_dataframe():
+    empty_df = df_global.iloc[0:0].copy() 
+    regex = r"ES[0-9]{4}" 
     assert_that(assert_regex_format).raises(ValueError).when_called_with(
-        "not_a_series", regex
-    ).is_equal_to("The 'column' argument must be a pandas Series.")  
-
+        empty_df, 'regex_test_column', regex
+    ).is_equal_to("The DataFrame is empty and cannot be validated.")
 
 def test_assert_regex_format_with_invalid_regex():
-    invalid_regex = r"^[A-Za-z0-9"  
+    invalid_regex = r"[\K]"
     assert_that(assert_regex_format).raises(ValueError).when_called_with(
-        df_global['valid_values'], invalid_regex
-    ).is_equal_to("Invalid regular expression.")  
+        df_global, 'valid_column', invalid_regex
+    ).is_equal_to("Invalid regular expression: bad escape \\K at position 1")
