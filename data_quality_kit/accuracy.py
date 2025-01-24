@@ -1,5 +1,5 @@
+import re
 import pandas as pd
-
 
 def assert_that_type_value(df: pd.DataFrame, column_name: str, data_type: type) -> bool:
     """
@@ -57,3 +57,45 @@ def assert_that_values_in_catalog(dataframe: pd.DataFrame, column: str, catalog:
         return True
     else:
         return False
+
+def assert_regex_format(df: pd.DataFrame, column_name: str, regex: str) -> bool:
+    """
+    Validates whether all values in the specified column of a DataFrame match the format
+    defined by the provided regular expression, including null and empty values.
+
+    Parameters:
+    ----------
+    df : pd.DataFrame
+        The DataFrame containing the column to validate.
+    column_name : str
+        The name of the column to validate.
+    regex : str
+        The regular expression used to validate each value in the column.
+
+    Returns:
+    -------
+    bool
+        Returns `True` if all values in the column match the regular expression.
+        Returns `False` if any value does not match.
+
+    Exceptions:
+    -----------
+    ValueError:
+        Raised if the DataFrame is empty, the column does not exist, or the regex is invalid.
+    """
+
+    if df.empty:
+        raise ValueError("The DataFrame is empty and cannot be validated.")
+    
+    if column_name not in df.columns:
+        raise ValueError(f"The column '{column_name}' does not exist in the DataFrame.")
+    
+    try:
+        pattern = re.compile(regex)
+    except re.error as e:
+        raise ValueError(f"Invalid regular expression: {e}")
+
+    for value in df[column_name]:
+        if pd.isnull(value) or value == '' or not pattern.fullmatch(value):
+            return False
+    return True
