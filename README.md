@@ -43,4 +43,6 @@ from data_quality_quick.validate_formats import check_type_format
   - **assert_that_type_value**: Check if all non-null entries in a specified column of a DataFrame are of the specified data type.
   - **assert_that_values_in_catalog**:  Checks whether all values in the specified column of a DataFrame are present
     in a catalog (list of values).
+  - **assert_regex_format**: Validates whether all values in the specified column of a DataFrame match the format
+    defined by the provided regular expression, including null and empty values.
 
