@@ -3,15 +3,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.8.0] - 2025-01-31
+## [0.8.0] - 2025-02-06
 New functionalities.
+
 ### Added
 - Added `assert_regex_format` function to validate whether all values in a specified DataFrame column match a given regular expression.
 - Added test cases to ensure correct functionality of `assert_regex_format`:
   - All values match the regex.
   - At least one value does not match the regex.
   - The specified column does not exist in the DataFrame.
-  - The DataFrame is empty.
   - The provided regex is invalid.
 
 ### Changed
